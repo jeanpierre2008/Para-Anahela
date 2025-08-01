@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Anahela ❤️</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    .heart-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      z-index: 2;
+    }
+
+    .word {
+      position: absolute;
+      color: #ff4d6d;
+      animation: blink 2s infinite;
+      text-shadow: 0 0 10px red;
+      font-weight: bold;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; text-shadow: 0 0 10px red; }
+      50% { opacity: 0.4; text-shadow: 0 0 2px red; }
+    }
+
+    .center-text {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3em;
+      color: white;
+      text-shadow: 0 0 20px red;
+      font-weight: bold;
+      animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    .love-message {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 1.5em;
+      text-shadow: 0 0 10px red;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 2;
+    }
+
+    audio {
+      display: none;
+    }
+
+    .boton-musica {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #ff4d6d;
+      border: none;
+      color: white;
+      padding: 12px 18px;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 0 10px red;
+      z-index: 3;
+      transition: background 0.3s ease;
+    }
+
+    .boton-musica:hover {
+      background-color: #ff1a3c;
+    }
+  </style>
+</head>
+<body>
+
+    <button onclick="toggleAudio()" class="boton-musica">🎶</button>
+
+    <audio id="audio" loop>
+    <source src="AThousandYears.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+    </audio>
+
+    <script>
+    const audio = document.getElementById('audio');
+    const btn = document.querySelector('.boton-musica');
+    let reproduciendo = false;
+
+    function toggleAudio() {
+        if (reproduciendo) {
+        audio.pause();
+        btn.textContent = "🎶 ";
+        } else {
+        audio.play();
+        btn.textContent = "⏸️";
+        }
+        reproduciendo = !reproduciendo;
+    }
+    </script>
+
+
+  <div class="stars" id="stars"></div>
+
+  <div class="heart-container" id="heart">
+    <div class="center-text">Anahela ❤️</div>
+  </div>
+
+  <div class="love-message" id="mensaje-amor"></div>
+
+  <script>
+    const phrases = ["mi amor", "mi cielo", "mi vida", "mi niña"];
+    const heart = document.getElementById('heart');
+
+    for (let t = 0; t < 100; t++) {
+      const angle = t * 0.2;
+      const x = 16 * Math.pow(Math.sin(angle), 3);
+      const y = 13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle);
+
+      const span = document.createElement("span");
+      span.className = "word";
+      span.style.left = (x * 15 + 300) + "px";
+      span.style.top = (-y * 15 + 300) + "px";
+      span.textContent = phrases[t % phrases.length];
+      span.style.fontSize = `${Math.random() * 6 + 14}px`;
+
+      heart.appendChild(span);
+    }
+
+    const stars = document.getElementById('stars');
+    for (let i = 0; i < 200; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.animationDelay = `${Math.random() * 5}s`;
+      stars.appendChild(star);
+    }
+
+    const mensajes = [
+      "Me encantas Mi Amor, Te adoro Mi Vida y Te quiero muchisimo Mi Niña 💖",
+      "Me haces muy feliz con tus palabras, y amo muchisimo tu voz. 😍",
+      "Nunca imaginé que aparecieras en mi vida, pero me alegra que ahora lo estés 💕",
+      "Me gusta absolutamente todo de ti mi niña preciosa 🤭",
+      "Te amo hasta el infinito y mas alla 💫🥹"
+    ];
+
+    let mensajeIndex = 0;
+    const mensajeElement = document.getElementById("mensaje-amor");
+
+    function mostrarSiguienteMensaje() {
+      mensajeElement.style.opacity = 0;
+      setTimeout(() => {
+        mensajeElement.textContent = mensajes[mensajeIndex];
+        mensajeElement.style.opacity = 1;
+        mensajeIndex = (mensajeIndex + 1) % mensajes.length;
+      }, 500);
+    }
+
+    setTimeout(() => {
+      mostrarSiguienteMensaje();
+      setInterval(mostrarSiguienteMensaje, 10000);
+    }, 4000);
+  </script>
+
+</body>
+</html>
